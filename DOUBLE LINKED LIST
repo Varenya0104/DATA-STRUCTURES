@@ -1,0 +1,150 @@
+#doubly linked list
+class Node:
+    def __init__(self, data):
+        self.prev = None
+        self.data = data
+        self.next = None
+
+class DLinkedList:
+    def __init__(self):
+        self.head = None
+    def insert_begin(self, data):
+        if self.head is None:
+            self.head = Node(data)
+            return
+        new_node = Node(data)
+        new_node.next = self.head
+        if self.head is not None:
+            self.head.prev = new_node
+            self.head = new_node
+
+    def insert_end(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+        new_node.prev = last
+
+    def insert_random(self, data, pos):
+        new_node = Node(data)
+        temp = self.head
+        for i in range(pos):
+            if temp is None:
+                print('error-x001')
+                return
+            ptr = temp
+            temp = temp.next
+        new_node.next = temp
+        temp.prev = new_node
+        ptr.next = new_node
+        new_node.prev = ptr
+
+    def delete_begin(self):
+        if self.head is None:
+            print('list is empty')
+            return
+        ptr = self.head
+        self.head = ptr.next
+        self.head.prev = None
+        del(ptr)
+
+    def delete_end(self):
+        if self.head is None:
+            print('list is empty')
+            return
+        temp = self.head
+        while temp.next:
+            temp = temp.next
+        temp.prev.next = None
+        del(temp)
+
+    def delete_random(self,pos):
+        temp = self.head
+        for i in range(pos):
+            if temp.next is None:
+                print('error')
+                return
+            temp = temp.next
+        temp.prev.next = temp.next
+        temp.next.prev = temp.prev
+        del(temp)
+
+    def search(self, ele):
+        temp = self.head
+        flag = -1
+        if temp is None:
+            print('error')
+            return
+        while temp :
+            flag += 1
+            if temp.data == ele:
+                print('found', ele, 'at', flag)
+                return
+            temp = temp.next
+        else:
+            print('element not found')
+
+    def count(self):
+        count = 0
+        if self.head is None:
+            pass
+        else:
+            temp = self.head
+            while temp:
+                count += 1
+                temp = temp.next
+            print(count)
+
+    def display(self):
+        temp = self.head
+        while temp:
+            print(temp.data, end=' ')
+            temp = temp.next
+
+l1 = DLinkedList()
+print("""Operations:
+0 : Stop
+1 : Insert Begin
+2: Insert at middle
+3: Insert at end
+4 : Delete Begin
+5: Delete at middle
+6: Delete at end
+7 : Search
+8: Count
+9: Display""")
+def main():
+    ch = int(input("\n\nenter your choice: "))
+    if ch == 0:
+        return
+    elif ch == 1:
+        x = int(input('enter data: '))
+        l1.insert_begin(x)
+    elif ch == 2:
+        data1 = int(input('enter data: '))
+        pos1 = int(input('enter position: '))
+        l1.insert_random(data1, pos1)
+    elif ch == 3:
+        x = int(input('enter data: '))
+        l1.insert_end(x)
+    elif ch == 4:
+        l1.delete_begin()
+    elif ch == 5:
+        pos1 = int(input('enter position: '))
+        l1.delete_random(pos1)
+    elif ch == 6:
+        l1.delete_end()
+    elif ch == 7:
+        x = int(input('enter search element: '))
+        l1.search(x)
+    elif ch == 8:
+        l1.count()
+    elif ch == 9:
+        l1.display()
+    if ch !=0 :
+        main()
+main()
