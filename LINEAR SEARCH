@@ -1,0 +1,18 @@
+"Linear Search"
+def ls(arr,x,n):
+    for i in range(0,n):
+        if arr[i]==x:
+            return i
+    return -1
+arr=[]
+n=int(input('no of elements'))
+i=0
+for i in range(0,n):
+    e=int(input('enter the elements'))
+    arr.append(e)
+x=int(input('enter desired element'))
+res=ls(arr,x,n)    
+if res!=1:
+    print('element found at:',res)
+else:
+  print('element not found')
