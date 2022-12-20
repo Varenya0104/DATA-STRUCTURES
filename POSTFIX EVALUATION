@@ -1,0 +1,81 @@
+#postfix evaluation
+class Stack:
+  def __init__(self,max):
+    self.max=max
+    self.top=-1
+    self.data=[]
+  def push(self,ele):
+    self.ele=ele
+    if self.top+1>self.max:
+      print("Stack overflow")
+    else:
+      self.top=self.top+1
+      self.data.insert(self.top,ele)
+  def pop(self):
+    if self.top<0:
+      return -1
+    else:
+      ele=self.data[self.top]
+      self.top = (self.top) - 1
+      return ele
+  def display(self):
+    while self.top!=-1:
+      print(self.data[self.top])
+      self.top-=1
+  def isempty(self):
+    if self.top==-1:
+      return True
+    else:
+      return False
+  def isfull(self):
+    if self.top>=self.max:
+      return True
+    else:
+      return False
+  def peak(self):
+    return self.data[self.top]
+    
+operator_list={'^':0,'*':1,'/':1,'+':2,'-':2,'(':3,')':3}
+def isoper(chr):
+  if chr in operator_list.keys():
+    return True
+  else:
+    return False
+def priority(chr):
+  return operator_list.get(chr)
+
+count=0
+s1=Stack(100)
+expression=input("Enter the postfix expression:")
+expression_elements=expression.split(' ')
+
+def isoper(chr):
+  if chr in ['+','-','*','/','%']:
+    return True
+  else:
+    return False
+def calculate(op1,op2,i):
+  op1=int(op1)
+  op2=int(op2)
+  res=0
+  if i=='+':
+    res=op1+op2
+  elif i=='-':
+    res=op1-op2
+  elif i=='*':
+    res=op1 * op2
+  elif i=='/':
+    res=op1/op2
+  elif i=='%':
+    res=op1%op2
+  return res
+
+for i in expression_elements:
+  if isoper(i)!=True:
+    s1.push(i)
+  else:
+    op2=s1.pop()
+    op1=s1.pop()
+    res=calculate(op1,op2,i)
+    s1.push(res)
+print("res:",s1.pop())
