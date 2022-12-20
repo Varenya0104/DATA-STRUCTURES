@@ -1,0 +1,16 @@
+"Bubble Sort"
+def bubs(arr):
+  n=len(arr)
+  for i in range(n):
+    for j in range(n-i-1):
+      if arr[j]>arr[j+1]:
+        arr[j],arr[j+1]=arr[j+1],arr[j]
+a=[]
+i=0
+n=int(input("no of elemnts"))
+for i in range(0,n):
+  e=int(input('enter the elemnts'))
+  a.append(e)
+bubs(a)
+print('sorted array:')  
+print(a)        
