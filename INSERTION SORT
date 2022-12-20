@@ -1,0 +1,19 @@
+"Insertion Sort"
+def Is(arr):
+  for i in range(l):
+    min=arr[i]
+    j=i-1
+    while j>=0 and min<arr[j]:
+      arr[j+1]=arr[j]
+      j=j-1
+    arr[j+1]=min
+a=[]
+i=0
+n=int(input("no of elemnts"))
+for i in range(0,n):
+  e=int(input('enter the elemnts'))
+  a.append(e)
+l=len(a)  
+Is(a)
+print('sorted array:')  
+print(a)       
