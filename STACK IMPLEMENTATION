@@ -1,37 +1,74 @@
-# Stack Creation
-def create_stack():
-    stack = list()            #declaring an empty list
-    return stack
-
-
-# Checking for empty stack
-def Isempty(stack):
-    return len(stack) == 0
-
-
-# Inserting items into the stack
-def push(stack, n):
-    stack.append(n)
-    print("pushed item: " + n)
-
-
-# Removal of an element from the stack
-def pop(stack):
-    if (Isempty(stack)):
-        return "stack is empty"
+#infix to postfix
+class Stack:
+  def __init__(self,max):
+    self.max=max
+    self.top=-1
+    self.data=[]
+  def push(self,ele):
+    self.ele=ele
+    if self.top+1>self.max:
+      print("Stack overflow")
     else:
-        return stack.pop()
+      self.top=self.top+1
+      self.data.insert(self.top,ele)
+  def pop(self):
+    if self.top<0:
+      return -1
+    else:
+      ele=self.data[self.top]
+      self.top = (self.top) - 1
+      return ele
+  def display(self):
+    while self.top!=-1:
+      print(self.data[self.top])
+      self.top-=1
+  def isempty(self):
+    if self.top==-1:
+      return True
+    else:
+      return False
+  def isfull(self):
+    if self.top>=self.max:
+      return True
+    else:
+      return False
+  def peak(self):
+    return self.data[self.top]
 
-# Displaying the stack elements
-def show(stack):
-    print("The stack elements are:")
-    for i in stack:
-        print(i)
-        
-stack = create_stack()
-push(stack, str(10))
-push(stack, str(20))
-push(stack, str(30))
-push(stack, str(40))
-print("popped item: " + pop(stack))
-show(stack)
+count=0
+s1=Stack(100)
+
+operator_list={'^':0,'*':1,'/':1,'+':2,'-':2,'(':3,')':3}
+def isoper(chr):
+  if chr in operator_list.keys():
+    return True
+  else:
+    return False
+def priority(chr):
+  return operator_list.get(chr)
+
+expression=input("ENTER INFIX EXPRESSION:")
+print("POSTFIX EXPRESSION IS: ",end=" ")
+expression_elements=expression.split(' ')
+
+for i in range(len(expression_elements)):
+  ics=expression_elements[i]
+  if isoper(ics):
+     if s1.isempty():
+       s1.push(ics)
+     elif ics==')':
+       while s1.peak() != '(':
+         print(s1.pop(),end=' ')
+       s1.pop()
+     else:
+       while priority(s1.peak())<priority(ics) and s1.isempty()==False:
+          print(s1.pop(),end=' ')
+       s1.push(ics)
+  else:
+    print(ics,end=' ')
+while True:
+  ele=s1.pop()
+  if ele!= -1:
+    print(ele,end=' ')
+  else:
+    break
