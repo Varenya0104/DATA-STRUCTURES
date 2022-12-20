@@ -1,0 +1,139 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class sll:
+    def __init__(self):
+        self.head = None
+    
+    def insert_begin(self, data):
+      new_node = Node(data)
+      if self.head is None:
+        self.head = new_node
+      new_node.next = self.head
+      self.head = new_node
+
+    def insert_random(self, data, pos):
+      new_node = Node(data)
+      temp = self.head
+      flag = 0
+      for i in range(pos):
+        if temp is None:
+          print('error')
+          return
+        ptr = temp
+        temp = temp.next
+      new_node.next = temp
+      ptr.next = new_node
+      
+
+    def insert_last(self,data):
+      new_node = Node(data)
+      if self.head is None:
+        self.head = new_node
+      else:
+        temp = self.head
+        while temp.next:
+          temp = temp.next
+        temp.next = new_node
+    
+    def delete_begin(self):
+      if self.head is None:
+        print('list is empty')
+      else:
+        ptr = self.head
+        self.head = ptr.next
+        del(ptr)
+
+    def delete_end(self):
+      if self.head is None:
+        print('list is empty')
+      else:
+        temp = self.head
+        while temp.next:
+          ptr = temp
+          temp = temp.next
+        ptr.next = None
+        del(temp)
+    
+    def delete_random(self,pos):
+      if self.head is None:
+        print('list is empty')
+      else:
+        temp = self.head
+        for i in range(pos):
+          if temp is None:
+            print('error-x002')
+            return
+          ptr = temp
+          temp = temp.next
+        ptr.next = temp.next
+        del(temp)
+
+    def search(self, search_element):
+      temp = self.head
+      flag = -1
+      while temp:
+        flag += 1
+        if temp.data == search_element:
+          print('found',search_element,'at', flag)
+          return
+        temp = temp.next
+      else:
+        print('not found')
+    
+    def count(self):
+      count = 0
+      if self.head is None:
+        pass
+      else:
+        temp = self.head
+        while temp:
+          count += 1
+          temp = temp.next
+        print(count)
+          
+    def display(self):
+      temp = self.head
+      while temp:
+        print(temp.data,end=' ')
+        temp = temp.next
+      print()
+l=sll()
+while True:
+  print("1.Insert at Begining\n 2.Insert in position\n 3.Insert at End\n 4.delete at begin\n 5.delete at position\n 6.delete at end\n 7.Display\n 8.search\n 9.Count\n 10.Exit")
+  ch=int(input("enter choice"))
+  if ch==1:
+    data=eval(input())
+    l.insert_begin(data)
+    print()
+  if ch==2:
+    data=eval(input())
+    pos=int(input())
+    l.insert_random(data,pos)
+    print()
+  if ch==3:
+    data=eval(input())
+    l.insert_last(data)
+    print() 
+  if ch==4:
+    l.delete_begin(data)
+    print()
+  if ch==5:
+    pos=int(input())
+    l.delete_random(pos)
+    print() 
+  if ch==6:
+    l.delete_last(data)
+    print() 
+  if ch==7:
+    l.display()
+    print() 
+  if ch==8:
+    search_element=eval(input())
+    l.search(search_element)
+    print()
+  if ch==9:
+    l.count() 
+    print()
