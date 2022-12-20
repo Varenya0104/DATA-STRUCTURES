@@ -1,0 +1,25 @@
+"Binary Search"
+def bin(a,x,l,h):
+  while l<=h:
+    mid=(l+h)//2
+    if a[mid]==x:
+      return mid
+    elif a[mid]<x:
+      l=mid+1
+    else:
+      h=mid-1
+  return -1
+a=[]
+n=int(input('no of elemnts'))
+i=0
+for i in range(0,n):
+  e=int(input('enter the elemnts'))
+  a.append(e)
+l=0
+h=n-1
+x=int(input('enter desired elemnt'))  
+res=bin(a,x,l,h)
+if res!=-1:
+   print('elemts is found at:',res)
+else:
+  print('element not found') 
