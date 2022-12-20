@@ -1,0 +1,18 @@
+"Selection Sort"
+def ss(arr,l):
+  for i in range(l):
+    min=i
+    for j in range(i+1,l):
+      if arr[j]<arr[min]:
+        min=j
+    (arr[i],arr[min])=(arr[min],arr[i])
+a=[]
+i=0
+n=int(input("no of elemnts"))
+for i in range(0,n):
+  e=int(input('enter the elemnts'))
+  a.append(e)
+l=len(a)  
+ss(a,l)
+print('sorted array:')  
+print(a) 
