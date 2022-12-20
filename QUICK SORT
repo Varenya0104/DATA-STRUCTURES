@@ -1,0 +1,23 @@
+"Quick Sort"
+def partition(a,l,h):
+  p=a[h]
+  i=l-1
+  for j in range(l,h):
+    if a[j]<=p:
+      i+=1
+      a[i],a[j]=a[j],a[i]
+  a[i+1],a[h]=a[h],a[i+1]
+  return i+1
+def qs(a,l,h):
+  if l<h:
+    x=partition(a,l,h)
+    qs(a,l,x-1)
+    qs(a,x+1,h)
+a=[]
+i=0
+n=int(input("no of elemnts"))
+for i in range(0,n):
+  e=int(input("enter the elemnts"))
+  a.append(e) 
+qs(a,0,n-1)
+print(a)
