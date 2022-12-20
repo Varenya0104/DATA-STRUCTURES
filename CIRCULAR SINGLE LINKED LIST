@@ -47,7 +47,7 @@ class CLinkedList:
         temp = self.head
         temp1 = self.head
         while temp.next is not self.head:
-            temp = temp.next
+          temp = temp.next
         temp.next = self.head.next
         self.head = self.head.next
         del temp1
