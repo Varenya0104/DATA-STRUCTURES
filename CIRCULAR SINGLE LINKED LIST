@@ -1,0 +1,151 @@
+#Circular single linked list
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+class CLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_begin(self, data):
+        new_node = Node(data)
+        temp = self.head
+        new_node.next = self.head
+        if self.head is not None:
+            while temp.next is not self.head:
+                temp = temp.next
+            temp.next = new_node
+        else:
+            new_node.next = new_node
+        self.head = new_node
+    
+    def insert_end(self, data) :
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            new_node.next = self.head
+            return
+        temp = self.head
+        while temp.next is not self.head:
+            temp = temp.next
+        temp.next = new_node
+        new_node.next = self.head
+
+    def insert_random(self, data, pos):
+        new_node = Node(data)
+        temp = self.head
+        for i in range(pos):
+            if temp is None:
+                print('error-x001')
+                return
+            ptr = temp
+            temp = temp.next
+        new_node.next = temp
+        ptr.next = new_node
+
+    def delete_begin(self):
+        temp = self.head
+        temp1 = self.head
+        while temp.next is not self.head:
+            temp = temp.next
+        temp.next = self.head.next
+        self.head = self.head.next
+        del temp1
+
+    def delete_end(self):
+        temp = self.head
+        while temp.next is not self.head:
+            ptr = temp
+            temp = temp.next
+        ptr.next = self.head
+        del temp
+
+    def delete_random(self, pos):
+        if self.head is None:
+            print('list is empty')
+        else:
+            temp = self.head
+            for i in range(pos):
+                ptr = temp
+                temp = temp.next
+            ptr.next = temp.next
+            del(temp)
+
+    def search(self, data):
+        temp = self.head
+        flag = 0
+        while True:
+            if temp.data == data:
+                print('found', data,'at', flag)
+                return
+            temp = temp.next
+            if temp is self.head:
+                return
+            flag += 1
+
+    def count(self):
+        count = 0
+        temp = self.head
+        if self.head is None:
+            print(count)
+            return
+        while True:
+            count = count + 1
+            if temp.next is self.head:
+                print(count)
+                break
+            temp = temp.next
+            
+    def display(self):
+        temp = self.head
+        if self.head is not None:
+            while True :
+                print(temp.data, end=" ")
+                temp = temp.next
+                if temp is self.head:
+                    break
+        print()
+
+l1 = CLinkedList()
+print("""Operations:
+0 : Stop
+1 : Insert Begin
+2: Insert at middle
+3: Insert at end
+4 : Delete Begin
+5: Delete at middle
+6: Delete at end
+7 : Search
+8: Count
+9: Display""")
+def main():
+    ch = int(input("\n\nenter your choice: "))
+    if ch == 0:
+        return
+    elif ch == 1:
+        x = int(input('enter data: '))
+        l1.insert_begin(x)
+    elif ch == 2:
+        data1 = int(input('enter data: '))
+        pos1 = int(input('enter position: '))
+        l1.insert_random(data1, pos1)
+    elif ch == 3:
+        x = int(input('enter data: '))
+        l1.insert_end(x)
+    elif ch == 4:
+        l1.delete_begin()
+    elif ch == 5:
+        pos1 = int(input('enter position: '))
+        l1.delete_random(pos1)
+    elif ch == 6:
+        l1.delete_end()
+    elif ch == 7:
+        x = int(input('enter search element: '))
+        l1.search(x)
+    elif ch == 8:
+        l1.count()
+    elif ch == 9:
+        l1.display()
+    if ch !=0 :
+        main()
+main()
