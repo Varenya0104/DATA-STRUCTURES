@@ -1,0 +1,30 @@
+#string reversal
+class Stack:
+  def __init__(self,max):
+    self.max=max
+    self.top=-1
+    self.data=[]
+  def push(self,ele):
+    self.ele=ele
+    if self.top+1>self.max:
+      print("Stack overflow")
+    else:
+      self.top=self.top+1
+      self.data.insert(self.top,ele)
+  def pop(self):
+    if self.top<0:
+      print("Stack underflow")
+    else:
+      print(self.data[self.top],end="")
+      self.top=self.top-1
+      #self.data.pop()
+
+count=0
+stc=Stack(100)
+word=input("Enter the word/string:")
+for i in word:
+  stc.push(i)
+  count+=1
+print("Reversed string is:-",end=" ")
+for i in range(count):
+  stc.pop()
