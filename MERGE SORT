@@ -1,0 +1,33 @@
+"Merge Sort"
+def ms(a):
+  if len(a)>1:
+    mid=len(a)//2
+    l=a[:mid]
+    h=a[mid:]
+    ms(l)
+    ms(h)
+    i=j=k=0
+    while i<len(l) and j<len(h):
+      if l[i]<h[i]:
+        a[k]=l[i]
+        i+=1
+      else:
+        a[k]=h[j]
+        j+=1
+      k+=1
+    while i<len(l):
+      a[k]=l[i]
+      i+=1
+      k+=1
+    while j<len(h):
+      a[k]=h[j]
+      j+=1
+      k+=1
+a=[]
+i=0
+n=int(input("no of elemnts"))
+for i in range(0,n):
+  e=int(input('enter the elemnts'))
+  a.append(e)
+ms(a)
+print(a)              
